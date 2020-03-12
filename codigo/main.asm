@@ -1,0 +1,60 @@
+.INCLUDE 	"M328PDEF.INC"
+.INCLUDE	"DEFINES.INC"
+.INCLUDE 	"MACROS.INC"
+
+.CSEG
+
+.ORG 	0x00
+	RJMP	MAIN
+.ORG ICP1addr
+	RJMP ISR_ICP1
+.ORG OVF1addr
+	RJMP RESTART_TIMER
+.ORG 	0x24
+	RJMP 	HC05_RECEPTION_HANDLER
+
+
+.ORG 	INT_VECTORS_SIZE
+
+MAIN:
+	STACK_INIT
+
+	SBI 	DDRB,5	
+	
+	LDI		TEMP,(1<<SE)
+	OUT		MCUCR,TEMP
+	LDI		TEMP,(1<<SE)|(0<<SM2)|(0<<SM1)|(0<<SM0)
+	OUT		SMCR,TEMP
+
+
+	RCALL	INIC_ANGULOS	;Inicializa valores de angulos		
+	RCALL	MOVEMENT_SETUP	;Inicializa protocolo I2C. Servos en pocision inicial
+	RCALL 	HC05_SETUP		;Inicializa bluetooth
+	RCALL	HCSR04_SETUP ; Sensor ultrasónico: Configuro el trigger y configuro el timer/wave generator
+
+
+	RCALL	STAND_GREET_LEFT
+
+	RCALL	INITIAL_POSITION
+
+MAIN_LOOP:
+	RCALL 	MOVEMENT_SWITCH
+	RJMP 	MAIN_LOOP
+
+
+
+;error
+ERRLOOP:
+	RJMP	ERRLOOP
+
+
+
+
+
+
+
+
+.INCLUDE 	"HCSR04.INC"
+.INCLUDE 	"HC05.INC"
+.INCLUDE	"ANGULOS.INC"
+.INCLUDE 	"MOVEMENT.INC"
