@@ -1,10 +1,5 @@
-# Repositorio para la documentación de proyectos de 
-# 6609/8607 Laboratorio de Microcontroladores
-
-## Integrantes
-- Echegaray, Ignacio 	#98868
-- Lowy, Ariel Dario		#98298 
-- Rack, Lucas Alexis 	#99425
+# Robot cuadrupedo Wilson
+[![YouTube](http://i.ytimg.com/vi/TNfTc2dZ_qk/hqdefault.jpg)](https://www.youtube.com/watch?v=TNfTc2dZ_qk)
 
 ## Proyecto: cuadrúpedo inalámbrico
 El presente proyecto tiene como objetivo diseñar e implementar un robot cuadrúpedo de ocho ejes capaz de desplazarse para adelante, para atrás y rotar en ambos sentidos. Se trabajará el movimiento de los ejes de cada extremidad por separado para luego integrarlas en el movimiento completo deseado. Cada eje poseerá un servomotor que puede ser posicionado según la instrucción en un ángulo entre 0 y 180 grados a la velocidad deseada.
